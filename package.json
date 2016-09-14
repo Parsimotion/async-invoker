@@ -1,6 +1,6 @@
 {
   "name": "async-invoker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Create a runner of code asynchronous",
   "main": "index.js",
   "scripts": {
