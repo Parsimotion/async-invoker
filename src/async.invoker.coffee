@@ -10,17 +10,17 @@ class AsyncInvoker
       logErrors: true
 
     code = "module.exports = #{code}"
-    @_run = @_tryTo (=> eval_ code, globals), "has compile errors"
-    @_assertIsFunction @_run
+    @_invoke = @_tryTo (=> eval_ code, globals), "has compile errors"
+    @_assertIsFunction @_invoke
 
-  run: (args...) =>
-    tryRun = (functionArgs) =>
-      @_tryTo (=> @_run.apply null, functionArgs), "exploded"
+  invoke: (args...) =>
+    tryInvoke = (functionArgs) =>
+      @_tryTo (=> @_invoke.apply null, functionArgs), "exploded"
     tryLog = (e) => console.log e if @options.logErrors
 
     new Promise (resolve, reject) =>
       try
-        output = tryRun args.concat(resolve)
+        output = tryInvoke args.concat(resolve)
         if not _.isUndefined output
           resolve output
       catch e then tryLog e ; reject e
